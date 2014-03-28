@@ -16,10 +16,7 @@ import java.util.Calendar;
 public class SunRiseTest {
     private static final String GOOGLE_CHROME = "chrome";
     private static final String MOZILLA_FIREFOX = "firefox";
-    private static final String SUNRISE_RISE = "sunrise__rise";
-    private static final String SUNRISE_SET = "sunrise__set";
-    private static final String SUNRISE_TRANSMIT = "sunrise__transit";
-    private static final String IMAGE_NAME = "sunrise__icon";
+
 
     private WebDriver driver;
 
@@ -76,9 +73,9 @@ public class SunRiseTest {
     public  void sunRiseTest() {
         //проверить соответствие данных о восходе, по умолчанию и при указании реального местоположения(города)
         SunRise sunrise = SunRiseCreator.getInstance().getSunRise(driver);
-        String sunrise_rise = driver.findElement(By.className(SUNRISE_RISE)).getText();
+        String sunrise_rise = sunrise.getRise();
         sunrise.typeLocation();
-        String handy_sunrise_rise = driver.findElement(By.className(SUNRISE_RISE)).getText();
+        String handy_sunrise_rise = sunrise.getRise();
         Assert.assertEquals(sunrise_rise, handy_sunrise_rise);
     }
 
@@ -86,9 +83,9 @@ public class SunRiseTest {
     public  void sunSetTest() {
         //проверить соответствие данных о закате, по умолчанию и при указании реального местоположения(города)
         SunRise sunrise = SunRiseCreator.getInstance().getSunRise(driver);
-        String sunrise_set = driver.findElement(By.className(SUNRISE_SET)).getText();
+        String sunrise_set = sunrise.getSet();
         sunrise.typeLocation();
-        String handy_sunrise_set = driver.findElement(By.className(SUNRISE_SET)).getText();
+        String handy_sunrise_set = sunrise.getSet();
         Assert.assertEquals(sunrise_set, handy_sunrise_set);
     }
 
@@ -96,9 +93,9 @@ public class SunRiseTest {
     public  void sunRiseTransitTest() {
         //проверить соответствие данных о долготе дня по умолчанию и при указании реального местоположения(города)
         SunRise sunrise = SunRiseCreator.getInstance().getSunRise(driver);
-        String sunrise_transmit = driver.findElement(By.className(SUNRISE_TRANSMIT)).getText();
+        String sunrise_transmit = sunrise.getTransit();
         sunrise.typeLocation();
-        String handy_sunrise_transmit = driver.findElement(By.className(SUNRISE_TRANSMIT)).getText();
+        String handy_sunrise_transmit = sunrise.getTransit();
         Assert.assertEquals(sunrise_transmit, handy_sunrise_transmit);
     }
 
@@ -106,7 +103,7 @@ public class SunRiseTest {
     public  void imageCheck() {
         //проверить наличие картинки
         SunRise sunrise = SunRiseCreator.getInstance().getSunRise(driver);
-        WebElement sunImage = driver.findElement(By.className(IMAGE_NAME));
+        WebElement sunImage = sunrise.getImage();
         Assert.assertNotNull(sunImage);
     }
 }

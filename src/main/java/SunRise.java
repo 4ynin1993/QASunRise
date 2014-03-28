@@ -7,14 +7,36 @@ import org.openqa.selenium.WebElement;
  */
 public class SunRise {
     public static final String LOCATION= "Москва";
-    public static final String INPUT_ID= "geoName";
+
     private final WebDriver driver;
     private static final String[] Months = {
         "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
         "августа", "сентября", "октября", "ноября", "декабря" };
 
+    public static final String INPUT_ID= "geoName";
+    private static final String SUNRISE_RISE = "sunrise__rise";
+    private static final String SUNRISE_SET = "sunrise__set";
+    private static final String SUNRISE_TRANSMIT = "sunrise__transit";
+    private static final String IMAGE_NAME = "sunrise__icon";
+
     public SunRise(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public String getRise() {
+        return driver.findElement(By.className(SUNRISE_RISE)).getText();
+    }
+
+    public String getSet() {
+        return driver.findElement(By.className(SUNRISE_SET)).getText();
+    }
+
+    public String getTransit() {
+        return driver.findElement(By.className(SUNRISE_TRANSMIT)).getText();
+    }
+
+    public WebElement getImage() {
+        return driver.findElement(By.className(IMAGE_NAME));
     }
 
     public int getDayOfMonth() {
